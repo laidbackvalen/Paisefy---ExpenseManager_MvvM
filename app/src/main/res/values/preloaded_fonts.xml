@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/hind_vadodara</item>
+        <item>@font/hind_vadodara_bold</item>
+        <item>@font/hind_vadodara_medium</item>
+        <item>@font/hind_vadodara_semibold</item>
+    </array>
+</resources>
