@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.paisefy_moneymanager.model.Transaction
 import com.example.paisefy_moneymanager.repository.TransactionRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,6 +31,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //observe to get updates when the selected transaction changes. It is LiveData,
     //so it cannot be modified directly by these classes.
 
+   //_selectedTransaction (can write and update)
+   //selectedTransaction (others can only read)
     init {
         repository = TransactionRepository(application)
         transactionList = repository.allTransactions
@@ -38,18 +41,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun selectTransaction(transaction: Transaction) {
         _selectedTransaction.value = transaction
     }
+    fun getTransactionsByDate(date: Long): LiveData<List<Transaction>> {
+        return repository.getTransactionsByDate(date)
+    }
 
-    fun vmInsertTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun getTransactionsByMonth(month: Int, year: Int): LiveData<List<Transaction>> {
+        return repository.getTransactionsByMonth(month, year)
+    }
+
+    fun vmInsertTransaction(transaction: Transaction) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertTransactionRepository(transaction)
     }
 
-    fun vmUpdateTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun vmUpdateTransaction(transaction: Transaction) = viewModelScope.launch(Dispatchers.IO) {
         repository.updateTransactionRepository(transaction)
     }
 
-    fun vmDeleteTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun vmDeleteTransaction(transaction: Transaction) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteTransactionRepository(transaction)
     }
-
 
 }

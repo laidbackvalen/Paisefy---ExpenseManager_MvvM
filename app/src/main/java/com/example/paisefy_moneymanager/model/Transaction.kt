@@ -7,7 +7,6 @@ import java.util.Date
 
 @Entity(tableName = "transactions")
 class Transaction(
-
     @PrimaryKey(autoGenerate = true)
     val id: Long,
 

@@ -9,9 +9,9 @@ import androidx.room.TypeConverters
 import com.example.paisefy_moneymanager.model.Transaction
 import com.example.paisefy_moneymanager.utils.Converters
 
-@Database(entities = [Transaction::class], exportSchema = false, version = 1)
+@Database(entities = [Transaction::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)  //Type Converter is in util class converting date to long and vice versa
-abstract class TransactionDatabase : RoomDatabase(), TransactionDAO {
+abstract class TransactionDatabase : RoomDatabase() {
     abstract fun transactionDao(): TransactionDAO
 
     companion object {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".views.fragments.Add_Transcation_Fragment">
     
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
            android:background="@drawable/dialog_bg"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/incomeButton"
@@ -57,6 +57,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
+                app:startIconDrawable="@drawable/baseline_calendar_month_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
                 app:layout_constraintTop_toBottomOf="@+id/incomeButton">
@@ -78,6 +79,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
+                app:startIconDrawable="@drawable/baseline_currency_rupee_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -87,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Amount"
+                    android:maxLength="10"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +102,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
+                app:startIconDrawable="@drawable/baseline_category_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -120,6 +124,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
+                app:startIconDrawable="@drawable/baseline_account_balance_wallet_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
@@ -142,6 +147,7 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
+                app:startIconDrawable="@drawable/baseline_edit_note_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
@@ -151,6 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Note"
+                    android:maxLines="4"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,14 +166,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#F44336"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/themeColor"
                 android:text="Save Transaction"
                 android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
