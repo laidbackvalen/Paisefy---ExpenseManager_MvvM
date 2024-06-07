@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.paisefy_moneymanager.db.TransactionDAO
 import com.example.paisefy_moneymanager.db.TransactionDatabase
+import com.example.paisefy_moneymanager.model.CategoryCount
 import com.example.paisefy_moneymanager.model.Transaction
 import java.util.Calendar
 
@@ -67,4 +68,26 @@ class TransactionRepository(application: Application) {
         return calendar.timeInMillis
     }
 
+//Category
+// Methods to get category counts by date
+fun getIncomeCategoriesByDate(type:String,date: Long): LiveData<List<CategoryCount>> {
+    return transactionDAO.getCategoriesByDate(type,date)
+}
+
+    fun getExpenseCategoriesByDate(date: Long): LiveData<List<CategoryCount>> {
+        return transactionDAO.getExpenseCategoriesByDate(date)
+    }
+
+    // Methods to get category counts by month
+    fun getIncomeCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+        val startTimestamp = calculateStartOfMonthTimestamp(month, year)
+        val endTimestamp = calculateEndOfMonthTimestamp(month, year)
+        return transactionDAO.getIncomeCategoriesByMonth(startTimestamp, endTimestamp)
+    }
+
+    fun getExpenseCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+        val startTimestamp = calculateStartOfMonthTimestamp(month, year)
+        val endTimestamp = calculateEndOfMonthTimestamp(month, year)
+        return transactionDAO.getExpenseCategoriesByMonth(startTimestamp, endTimestamp)
+    }
 }

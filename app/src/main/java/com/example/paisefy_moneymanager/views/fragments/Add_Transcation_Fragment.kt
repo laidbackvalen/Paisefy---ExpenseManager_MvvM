@@ -170,8 +170,6 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
-
         }
-
 }
 

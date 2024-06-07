@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.paisefy_moneymanager.model.CategoryCount
 import com.example.paisefy_moneymanager.model.Transaction
 import com.example.paisefy_moneymanager.repository.TransactionRepository
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: TransactionRepository
     val transactionList: LiveData<List<Transaction>>
+
     private val _selectedTransaction = MutableLiveData<Transaction>()
     val selectedTransaction: LiveData<Transaction>
         get() = _selectedTransaction
@@ -61,4 +63,35 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteTransactionRepository(transaction)
     }
 
+
+    //category
+    // LiveData to hold categories
+    private val _incomeCategories = MutableLiveData<List<String>>()
+    val incomeCategories: LiveData<List<String>>
+        get() = _incomeCategories
+
+    private val _expenseCategories = MutableLiveData<List<String>>()
+    val expenseCategories: LiveData<List<String>>
+        get() = _expenseCategories
+
+
+
+
+    // Methods to get category counts by date
+    fun getIncomeCategoriesByDate(type: String, date: Long): LiveData<List<CategoryCount>> {
+        return repository.getIncomeCategoriesByDate(type,date)
+    }
+
+    fun getExpenseCategoriesByDate(date: Long): LiveData<List<CategoryCount>> {
+        return repository.getExpenseCategoriesByDate(date)
+    }
+
+    // Methods to get category counts by month
+    fun getIncomeCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+        return repository.getIncomeCategoriesByMonth(month, year)
+    }
+
+    fun getExpenseCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+        return repository.getExpenseCategoriesByMonth(month, year)
+    }
 }

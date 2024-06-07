@@ -72,4 +72,7 @@ dependencies {
 // Lottie dependency
     implementation ("com.airbnb.android:lottie:6.0.1")
 
+    //Any Chart Android
+    implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
+
 }
