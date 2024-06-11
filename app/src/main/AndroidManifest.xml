@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,10 +21,19 @@
         android:theme="@style/Theme.PaisefyMoneyManager"
         tools:targetApi="31">
         <activity
+            android:name=".authentication.Add_Password"
+            android:exported="false" />
+        <activity
             android:name=".views.activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.SplashScreen"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.PasswordAuthenticationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.Biometric_Authentication_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +45,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name=".receiver.alarm.AlarmReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

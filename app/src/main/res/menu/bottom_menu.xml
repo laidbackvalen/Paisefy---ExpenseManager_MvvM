@@ -3,15 +3,15 @@
     <item
         android:id="@+id/transaction"
         android:icon="@drawable/book"
-        android:title="Trans" />
+        android:title="Transactions" />
     <item
         android:id="@+id/stats"
         android:icon="@drawable/statistic"
-        android:title="Stats" />
+        android:title="Analysis" />
     <item
         android:id="@+id/account"
         android:icon="@drawable/account"
-        android:title="Acc" />
+        android:title="Accounts" />
     <item
         android:id="@+id/more"
         android:icon="@drawable/baseline_more_horiz_24"

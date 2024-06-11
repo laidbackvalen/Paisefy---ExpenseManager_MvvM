@@ -2,72 +2,142 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="5dp"
+    android:id="@+id/constraint"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
-    <ImageView
-        android:id="@+id/categoryIconImage"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/bg_circular"
-        android:foregroundGravity="center"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/accountLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/transcationCategory"
-        app:srcCompat="@drawable/chart" />
-
-    <TextView
-        android:id="@+id/transcationCategory"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Business"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/categoryIconImage"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/accountLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_red"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingTop="2dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="2dp"
-        android:text="Cash"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/transcationCategory"
-        app:layout_constraintTop_toBottomOf="@+id/transcationCategory" />
-
-    <TextView
-        android:id="@+id/transactionDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="17 May, 2023"
-        android:textColor="#FF9E9E9E"
-        app:layout_constraintBottom_toBottomOf="@+id/accountLabel"
-        app:layout_constraintStart_toEndOf="@+id/accountLabel"
-        app:layout_constraintTop_toTopOf="@+id/accountLabel" />
-
-    <TextView
-        android:id="@+id/transactionAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:text="1000"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/categoryIconImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/categoryIconImage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/categoryIconImage"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_circular"
+            android:foregroundGravity="center"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/accountLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/transcationCategory"
+            app:srcCompat="@drawable/chart" />
+
+        <TextView
+            android:id="@+id/transcationCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Business"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/hind_vadodara_medium"
+            app:layout_constraintStart_toEndOf="@+id/categoryIconImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_red"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="2dp"
+            android:text="Cash"
+            android:fontFamily="@font/hind_vadodara"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/transcationCategory"
+            app:layout_constraintTop_toBottomOf="@+id/transcationCategory" />
+
+        <TextView
+            android:id="@+id/transactionDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="17 May, 2023"
+            android:fontFamily="@font/hind_vadodara"
+            android:textColor="#FF9E9E9E"
+            app:layout_constraintBottom_toBottomOf="@+id/accountLabel"
+            app:layout_constraintStart_toEndOf="@+id/accountLabel"
+            app:layout_constraintTop_toTopOf="@+id/accountLabel" />
+
+        <TextView
+            android:id="@+id/transactionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="1000"
+            android:fontFamily="@font/hind_vadodara_medium"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/categoryIconImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/categoryIconImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutRT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="67dp"
+            android:src="@drawable/note_draw_yellow"
+            app:layout_constraintBottom_toBottomOf="@id/not"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/not" />
+
+        <TextView
+            android:id="@+id/not"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingStart="2dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Note : "
+            android:fontFamily="@font/hind_vadodara"
+            android:textColor="#FFC107"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutRT" />
+
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="note"
+            android:textStyle="bold"
+            android:fontFamily="@font/hind_vadodara"
+            android:textColor="@color/themeColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/not"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutRT" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+

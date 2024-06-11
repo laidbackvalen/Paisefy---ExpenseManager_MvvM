@@ -29,6 +29,7 @@ import com.example.paisefy_moneymanager.model.Transaction
 import com.example.paisefy_moneymanager.utils.Constants
 import com.example.paisefy_moneymanager.utils.Helper
 import com.example.paisefy_moneymanager.viewmodel.MainViewModel
+import com.example.paisefy_moneymanager.views.fragments.AccountFragment
 import com.example.paisefy_moneymanager.views.fragments.Add_Transcation_Fragment
 import com.example.paisefy_moneymanager.views.fragments.StatsFragment
 import com.example.paisefy_moneymanager.views.fragments.TransactionFragment
@@ -83,6 +84,8 @@ class MainActivity : AppCompatActivity() {
                     getFragment(StatsFragment())
 //                    fragmentTransaction.replace(R.id.frameContentUnderMain, StatsFragment())
 //                    fragmentTransaction.addToBackStack(null)
+                }else if(item.itemId==R.id.account){
+                    getFragment(AccountFragment())
                 }
                     return true
             }

@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:tabIndicatorColor="@color/white"
-        app:tabMode="scrollable"
+        app:tabMode="auto"
         app:tabTextColor="@color/white">
 
         <com.google.android.material.tabs.TabItem
@@ -75,17 +75,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calender" />
+            android:text="All transaction" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Summary" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notes" />
+            android:text="Reminders" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -233,146 +228,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/txtExpense" />
 
 
-                    <!--                    <View-->
-                    <!--                        android:id="@+id/viewTotallAmt"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        app:layout_constraintBottom_toTopOf="@id/viewIncome"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toTopOf="parent"-->
-                    <!--                        app:layout_constraintVertical_weight="5" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/txtAmt"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara_semibold"-->
-                    <!--                        android:text="Total Amount"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                    <!--                        android:textColor="@color/black"-->
-                    <!--                        android:textStyle="bold"-->
-                    <!--                        app:layout_constraintBottom_toTopOf="@+id/totalAmountText"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="@+id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintStart_toStartOf="@+id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintTop_toTopOf="parent"-->
-                    <!--                        app:layout_constraintVertical_chainStyle="packed" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/totalAmountText"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara_medium"-->
-                    <!--                        android:text="50,000"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                    <!--                        android:textColor="@color/black"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="@+id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="@+id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintStart_toStartOf="@+id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/txtAmt" />-->
-
-                    <!--                    <View-->
-                    <!--                        android:id="@+id/viewIncome"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        android:background="@color/income"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toStartOf="@+id/viewExpense"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@id/viewTotallAmt"-->
-                    <!--                        app:layout_constraintVertical_weight="5" />-->
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/imgIncome"-->
-                    <!--                        android:layout_width="30dp"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        android:layout_marginEnd="10dp"-->
-                    <!--                        android:src="@drawable/incomesvg"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toStartOf="@+id/txtIncome"-->
-                    <!--                        app:layout_constraintHorizontal_chainStyle="packed"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toTopOf="@+id/viewIncome" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/txtIncome"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginStart="10dp"-->
-                    <!--                        android:layout_marginEnd="30dp"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara"-->
-                    <!--                        android:text="Income"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-                    <!--                        android:textColor="@color/white"-->
-                    <!--                        app:layout_constraintBottom_toTopOf="@id/incomeAmountText"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="@+id/viewIncome"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/imgIncome"-->
-                    <!--                        app:layout_constraintTop_toTopOf="@+id/viewIncome"-->
-                    <!--                        app:layout_constraintVertical_chainStyle="packed" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/incomeAmountText"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara_medium"-->
-                    <!--                        android:text="50,000"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                    <!--                        android:textColor="@color/white"-->
-                    <!--                        android:textStyle="bold"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="@+id/viewIncome"-->
-                    <!--                        app:layout_constraintStart_toStartOf="@+id/txtIncome"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/txtIncome" />-->
-
-                    <!--                    <View-->
-                    <!--                        android:id="@+id/viewExpense"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        android:background="#F70000"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@id/viewIncome"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/viewTotallAmt" />-->
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/imgExpense"-->
-                    <!--                        android:layout_width="30dp"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        android:layout_marginEnd="10dp"-->
-                    <!--                        android:src="@drawable/expensesvg"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toStartOf="@+id/txtExpense"-->
-                    <!--                        app:layout_constraintHorizontal_chainStyle="packed"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/viewIncome"-->
-                    <!--                        app:layout_constraintTop_toTopOf="@+id/viewIncome" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/txtExpense"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginStart="10dp"-->
-                    <!--                        android:layout_marginEnd="30dp"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara"-->
-                    <!--                        android:text="Expense"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-                    <!--                        android:textColor="@color/white"-->
-                    <!--                        app:layout_constraintBottom_toTopOf="@id/expenseAmountText"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/imgExpense"-->
-                    <!--                        app:layout_constraintTop_toTopOf="@+id/viewExpense"-->
-                    <!--                        app:layout_constraintVertical_chainStyle="packed" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/expenseAmountText"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:fontFamily="@font/hind_vadodara_medium"-->
-                    <!--                        android:text="12,000"-->
-                    <!--                        android:textStyle="bold"-->
-                    <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                    <!--                        android:textColor="@color/white"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintStart_toStartOf="@+id/txtExpense"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@+id/txtExpense" />-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -421,44 +276,11 @@
                 app:layout_constraintStart_toEndOf="@+id/transactionGenric"
                 app:layout_constraintTop_toTopOf="@+id/transactionGenric" />
 
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/textInputLayout"-->
-            <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:layout_marginStart="15dp"-->
-            <!--                android:hint="Measuring Unit"-->
-            <!--                android:textColorHint="@color/black"-->
-            <!--                app:boxStrokeColor="@color/black"-->
-            <!--                app:endIconTint="@color/black"-->
-            <!--                app:expandedHintEnabled="true"-->
-            <!--                app:hintEnabled="true"-->
-            <!--                app:hintTextColor="@color/black"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/transactionRecyclerMain"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/cardView">-->
-
-            <!--                <AutoCompleteTextView-->
-            <!--                    android:id="@+id/autoCompleteTextView"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:backgroundTint="@color/white"-->
-            <!--                    android:inputType="none"-->
-            <!--                    android:popupBackground="@color/white"-->
-            <!--                    android:text="All Transactions"-->
-            <!--                    android:textColor="@color/black" />-->
-
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/transactionRecyclerMain"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -466,13 +288,23 @@
                 tools:listitem="@layout/row_transactions" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationViewMain"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="100dp"
         android:alpha="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -482,11 +314,47 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/nodatafound" />
 
+    <TextView
+        android:id="@+id/noRecordForDates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/noRecordsForDate"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="-30dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:fontFamily="@font/hind_vadodara"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/themeColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationViewMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/noRecordForMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/noRecordsForMonth"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="-30dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:fontFamily="@font/hind_vadodara"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/themeColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationViewMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/themeColor"
         android:src="@drawable/baseline_add_24"

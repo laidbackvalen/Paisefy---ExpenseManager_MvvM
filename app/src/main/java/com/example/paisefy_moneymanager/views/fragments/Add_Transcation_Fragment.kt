@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,13 +23,11 @@ import com.example.paisefy_moneymanager.model.Account
 import com.example.paisefy_moneymanager.model.Category
 import com.example.paisefy_moneymanager.model.Transaction
 import com.example.paisefy_moneymanager.utils.Constants
-import com.example.paisefy_moneymanager.utils.Helper
 import com.example.paisefy_moneymanager.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.ParseException
 import java.util.Date
 import java.util.Locale
-
 
 class Add_Transcation_Fragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentAddTranscationBinding
@@ -42,7 +41,6 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentAddTranscationBinding.inflate(inflater, container, false)
-
 
         binding.incomeButton.setOnClickListener {
             binding.incomeButton.setTextColor(Color.WHITE)
@@ -59,8 +57,6 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
             selectTransactiontype("EXPENSE")
         }
 
-
-
         // Date Picker
         binding.date.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -68,7 +64,8 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+            val datePicker = DatePickerDialog(requireContext(),
+                { _, selectedYear, selectedMonth, selectedDay ->
                     calendar.set(selectedYear, selectedMonth, selectedDay)
                     val simpleDateFormat = SimpleDateFormat("dd MMM yyyy")
                     val date = simpleDateFormat.format(calendar.time)
@@ -125,7 +122,6 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
                 })
             lisDialogBinding.recyclerViewForReUsingDialog.layoutManager = LinearLayoutManager(requireContext())
             lisDialogBinding.recyclerViewForReUsingDialog.adapter = AccountAdapter
-
             accountDialog.show()
         }
 
@@ -155,7 +151,7 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
                     val transactionDate = sdf.parse(date)
 
                     if (transactionDate != null) {
-                        val transaction = Transaction(id = 0, transType = transaction, category = category, account = account, note = note, date = transactionDate, amount = amount)
+                        val transaction = Transaction(id = 0, transType = transaction, category = category, account = account, note = note, date = transactionDate, amount = amount, false)
                         viewModel.vmInsertTransaction(transaction)
                         Toast.makeText(requireContext(), "Transaction added successfully", Toast.LENGTH_SHORT).show()
                         dismiss()
@@ -172,4 +168,3 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
             }
         }
 }
-

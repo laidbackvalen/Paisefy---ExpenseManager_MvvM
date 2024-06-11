@@ -5,20 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.paisefy_moneymanager.model.CategoryCount
+import com.example.paisefy_moneymanager.db.entities.TodoEntity
 import com.example.paisefy_moneymanager.model.Transaction
-import com.example.paisefy_moneymanager.repository.TransactionRepository
+import com.example.paisefy_moneymanager.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: TransactionRepository
+    private val repository: Repository
     val transactionList: LiveData<List<Transaction>>
-
-    private val _selectedTransaction = MutableLiveData<Transaction>()
-    val selectedTransaction: LiveData<Transaction>
-        get() = _selectedTransaction
+    val todoList: LiveData<List<TodoEntity>>
 
     //NOTE :-
     //MutableLiveData is a type of LiveData that allows you to change its value.
@@ -33,16 +30,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //observe to get updates when the selected transaction changes. It is LiveData,
     //so it cannot be modified directly by these classes.
 
-   //_selectedTransaction (can write and update)
-   //selectedTransaction (others can only read)
+    //_selectedTransaction (can write and update)
+    //selectedTransaction (others can only read)
+
+
+    private val _selectedTransaction = MutableLiveData<Transaction>()
+    val selectedTransaction: LiveData<Transaction>
+        get() = _selectedTransaction
+
     init {
-        repository = TransactionRepository(application)
+        repository = Repository(application)
         transactionList = repository.allTransactions
+        todoList = repository.allTodos
     }
 
     fun selectTransaction(transaction: Transaction) {
         _selectedTransaction.value = transaction
     }
+
     fun getTransactionsByDate(date: Long): LiveData<List<Transaction>> {
         return repository.getTransactionsByDate(date)
     }
@@ -64,34 +69,68 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
+
+
+
+    // Todo-related methods
+
+    private val _selectedTodo = MutableLiveData<TodoEntity>()
+    val selectedTodo: LiveData<TodoEntity>
+        get() = _selectedTodo
+
+
+    fun selectTodo(todo: TodoEntity) {
+        _selectedTodo.value = todo
+    }
+    fun vmInsertTodo(todo: TodoEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertTodosRepository(todo)
+    }
+    fun vmUpdateTodo(todo: TodoEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateTodosRepository(todo)
+    }
+    fun vmDeleteTodo(todo: TodoEntity) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteTodosRepository(todo)
+    }
+    fun getAllTodos(): LiveData<List<TodoEntity>> {
+        return repository.allTodos
+    }
+    fun getTodoById(id: Int): LiveData<TodoEntity> {
+        return repository.getTodoById(id)
+    }
+
+
+
+
+
+
+
+
+
     //category
-    // LiveData to hold categories
-    private val _incomeCategories = MutableLiveData<List<String>>()
-    val incomeCategories: LiveData<List<String>>
-        get() = _incomeCategories
-
-    private val _expenseCategories = MutableLiveData<List<String>>()
-    val expenseCategories: LiveData<List<String>>
-        get() = _expenseCategories
-
-
-
+//    // LiveData to hold categories
+//    private val _incomeCategories = MutableLiveData<List<String>>()
+//    val incomeCategories: LiveData<List<String>>
+//        get() = _incomeCategories
+//
+//    private val _expenseCategories = MutableLiveData<List<String>>()
+//    val expenseCategories: LiveData<List<String>>
+//        get() = _expenseCategories
 
     // Methods to get category counts by date
-    fun getIncomeCategoriesByDate(type: String, date: Long): LiveData<List<CategoryCount>> {
-        return repository.getIncomeCategoriesByDate(type,date)
-    }
-
-    fun getExpenseCategoriesByDate(date: Long): LiveData<List<CategoryCount>> {
-        return repository.getExpenseCategoriesByDate(date)
-    }
-
-    // Methods to get category counts by month
-    fun getIncomeCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
-        return repository.getIncomeCategoriesByMonth(month, year)
-    }
-
-    fun getExpenseCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
-        return repository.getExpenseCategoriesByMonth(month, year)
-    }
+//    fun getIncomeCategoriesByDate(type: String, date: Long): LiveData<List<CategoryCount>> {
+//        return repository.getIncomeCategoriesByDate(type,date)
+//    }
+//
+//    fun getExpenseCategoriesByDate(date: Long): LiveData<List<CategoryCount>> {
+//        return repository.getExpenseCategoriesByDate(date)
+//    }
+//
+//    // Methods to get category counts by month
+//    fun getIncomeCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+//        return repository.getIncomeCategoriesByMonth(month, year)
+//    }
+//
+//    fun getExpenseCategoriesByMonth(month: Int, year: Int): LiveData<List<CategoryCount>> {
+//        return repository.getExpenseCategoriesByMonth(month, year)
+//    }
 }

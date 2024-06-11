@@ -55,11 +55,20 @@ class TransactionsAdapter(val context: Context, var transactions: List<Transacti
         } else if (transaction.transType.equals(Constants.INCOME)) {
             holder.binding.transactionAmount.setTextColor(context.getColor(R.color.income))
         }
+        holder.binding.notes.text = transaction.note
 
-
-
+        // Handle expandable state
+        val isExpandable = transaction.isExpandable
+        holder.binding.constraintLayoutRT.visibility = if (isExpandable) View.VISIBLE else View.GONE
+        holder.binding.constraint.setOnClickListener {
+            transaction.isExpandable = !transaction.isExpandable
+            notifyItemChanged(position)
+        }
 
     }
+
+
+
     // Implement swipe-to-delete functionality
     fun getSwipableViewHolder(viewHolder: RecyclerView.ViewHolder): RecyclerView.ViewHolder = viewHolder
 }

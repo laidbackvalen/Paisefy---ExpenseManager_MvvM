@@ -26,7 +26,10 @@ class Transaction(
     val date: Date,
 
     @ColumnInfo(name = "amount")
-    val amount: Double
+    val amount: Double,
+
+    @ColumnInfo(name="expandBoolean")
+    var isExpandable: Boolean // Default value to false
 )
 
 

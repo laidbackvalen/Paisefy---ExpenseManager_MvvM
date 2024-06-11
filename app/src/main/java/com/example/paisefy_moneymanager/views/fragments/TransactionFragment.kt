@@ -46,27 +46,16 @@ class TransactionFragment : Fragment() {
     ): View? {
         binding = FragmentTransactionBinding.inflate(layoutInflater)
 
-        // Shrink the FloatingActionButton initially
-        // binding.floatingActionButton.shrink()
-
-        //on Nested Scroll //FOR FLAOTING BUTTON
-        binding.nestedScrollMain.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            if (scrollY > oldScrollY + 12 && binding.floatingActionButton.isExtended()) {
-                binding.floatingActionButton.shrink()
-            }
-            // the delay of the extension of the FAB is set for 12 items
-            if (scrollY < oldScrollY - 12 && !binding.floatingActionButton.isExtended()) {
-                binding.floatingActionButton.extend()
-            }
-            // if the nestedScrollView is at the first item of the list then the
-            // extended floating action should be in extended state
-            if (scrollY == 0) {
-                binding.floatingActionButton.extend()
-            }
-        }
-
         //ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+        binding.nestedScrollMain.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                shrinkFab()
+            } else {
+                expandFab()
+            }
+        }
 
         //calendar
         calendar = Calendar.getInstance()
@@ -128,37 +117,66 @@ class TransactionFragment : Fragment() {
         setupClickListeners()
 
         transactionAdapter = TransactionsAdapter(requireContext(), ArrayList())
-        binding.transactionRecyclerMain.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.reverseLayout = true
+        layoutManager.stackFromEnd = true
+        binding.transactionRecyclerMain.layoutManager = layoutManager
         binding.transactionRecyclerMain.adapter = transactionAdapter
-
 
         itemTouchHelper()
 
 //        val date = Date()
 //        Toast.makeText(applicationContext, ""+date, Toast.LENGTH_SHORT).show()
-
+        binding.frame.visibility = View.GONE
         //TabLayout
         binding.tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.text == "Monthly") {
                     selectedtab = 1
+                    binding.transactionGenric.text = "Monthly"
+                    binding.alltransactionImage.setImageResource(R.drawable.arrowdownaz)
+                    setViewWidth(binding.allTransactionView, 120)
                     updateMonth()
+                    binding.frame.visibility = View.GONE
+                    binding.previousDates.visibility = View.VISIBLE
+                    binding.dateMain.visibility = View.VISIBLE
+                    binding.noRecordForDates.visibility = View.GONE
                 } else if (tab.text == "Daily") {
                     selectedtab = 0
                     updateDate()
                     updateTextViewForToday()
+                    binding.frame.visibility = View.GONE
+                    binding.previousDates.visibility = View.VISIBLE
+                    binding.dateMain.visibility = View.VISIBLE
+                } else if (tab.text == "All transaction") {
+                    selectedtab = 2
+                    updateGenericAllTransactions()
+                    binding.frame.visibility = View.GONE
+                    binding.previousDates.visibility = View.INVISIBLE
+                    binding.dateMain.visibility = View.VISIBLE
+                    binding.noRecordForDates.visibility = View.GONE
+                } else if (tab.text == "Reminders") {
+                    selectedtab = 3
+                    removeContentOnSummaryTabClicked()
+                    binding.frame.visibility = View.VISIBLE
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame, NotesFragment()).commit()
                 }
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
 
 
         return binding.root
+    }
+
+    private fun removeContentOnSummaryTabClicked() {
+        binding.previousDates.visibility = View.INVISIBLE
+        binding.upcomingDates.visibility = View.INVISIBLE
+        binding.dateMain.text = "Reminders"
     }
 
     fun updateDate() {
@@ -189,8 +207,7 @@ class TransactionFragment : Fragment() {
     private fun fetchMonthlyTransactions() {
         val month = calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH is zero-based
         val year = calendar.get(Calendar.YEAR)
-        viewModel.getTransactionsByMonth(month, year)
-            .observe(getViewLifecycleOwner(), Observer { transactions ->
+        viewModel.getTransactionsByMonth(month, year).observe(getViewLifecycleOwner(), Observer { transactions ->
                 transactionAdapter.updateTransactions(transactions)
                 updateIncomeExpenseTotals(transactions)
             })
@@ -199,8 +216,12 @@ class TransactionFragment : Fragment() {
     private fun updateIncomeExpenseTotals(transactions: List<Transaction>) {
         if (transactions.isEmpty()) {
             binding.lottieAnimationViewMain.visibility = View.VISIBLE
+            binding.noRecordForMonth.visibility = View.VISIBLE
         } else {
             binding.lottieAnimationViewMain.visibility = View.GONE
+            binding.noRecordForMonth.visibility = View.GONE
+            binding.noRecordForDates.visibility = View.GONE
+
         }
         var incomeAmount = 0.0
         transactions.forEach {
@@ -252,8 +273,10 @@ class TransactionFragment : Fragment() {
             transactionAdapter.updateTransactions(transactions)
             if (transactions.isEmpty()) {
                 binding.lottieAnimationViewMain.visibility = View.VISIBLE
+                binding.noRecordForDates.visibility = View.VISIBLE
             } else {
                 binding.lottieAnimationViewMain.visibility = View.GONE
+                binding.noRecordForDates.visibility = View.GONE
             }
             var incomeAmount = 0.0
             transactions.forEach {
@@ -282,8 +305,13 @@ class TransactionFragment : Fragment() {
 
             if (transactions.isEmpty()) {
                 binding.lottieAnimationViewMain.visibility = View.VISIBLE
+                binding.noRecordForDates.visibility = View.VISIBLE
+                binding.noRecordForMonth.visibility = View.INVISIBLE
+
             } else {
                 binding.lottieAnimationViewMain.visibility = View.GONE
+                binding.noRecordForDates.visibility = View.GONE
+                binding.noRecordForMonth.visibility = View.GONE
             }
 
             transactions?.let {
@@ -347,13 +375,8 @@ class TransactionFragment : Fragment() {
 
     fun itemTouchHelper() {
         // Implement swipe-to-delete functionality
-        val itemTouchHelper = ItemTouchHelper(object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean = false
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // Define your threshold value
@@ -370,8 +393,7 @@ class TransactionFragment : Fragment() {
                     transactionAdapter.notifyItemRemoved(position)
 
                     // Reset the view after deletion
-                    val layoutManager =
-                        binding.transactionRecyclerMain.layoutManager as LinearLayoutManager
+                    val layoutManager = binding.transactionRecyclerMain.layoutManager as LinearLayoutManager
                     val position2 = layoutManager.findFirstVisibleItemPosition()
                     val view = layoutManager.findViewByPosition(position2)
                     val topOffset = view?.top ?: 0
@@ -386,29 +408,10 @@ class TransactionFragment : Fragment() {
                     viewHolder.itemView.translationX = 0f
                 }
             }
+            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
 
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
-
-                val deleteIcon =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.baseline_delete_24)
+                val deleteIcon = ContextCompat.getDrawable(requireContext(), R.drawable.baseline_delete_24)
                 val itemView = viewHolder.itemView
                 val iconMargin = (itemView.height - deleteIcon!!.intrinsicHeight) / 2
                 val iconTop = itemView.top + (itemView.height - deleteIcon.intrinsicHeight) / 2
@@ -437,5 +440,13 @@ class TransactionFragment : Fragment() {
             }
         })
         itemTouchHelper.attachToRecyclerView(binding.transactionRecyclerMain)
+    }
+
+
+    private fun shrinkFab() {
+        binding.floatingActionButton.shrink()
+    }
+    private fun expandFab() {
+        binding.floatingActionButton.extend()
     }
 }
