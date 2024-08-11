@@ -6,12 +6,12 @@
     app:startDestination="@id/first_Fragment">
     <fragment
         android:id="@+id/first_Fragment"
-        android:name="com.example.paisefy_moneymanager.unused.First_Fragment"
+        android:name="com.valenpatel.paisefy.unused.First_Fragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" />
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.paisefy_moneymanager.unused.SecondFragment"
+        android:name="com.valenpatel.paisefy.unused.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
 </navigation>

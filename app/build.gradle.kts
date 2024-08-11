@@ -4,15 +4,15 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 android {
-    namespace = "com.example.paisefy_moneymanager"
+    namespace = "com.valenpatel.paisefy"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.paisefy_moneymanager"
+        applicationId = "com.valenpatel.paisefy"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
@@ -69,10 +69,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
 
-// Lottie dependency
-    implementation ("com.airbnb.android:lottie:6.0.1")
+    // Lottie dependency
+    implementation("com.airbnb.android:lottie:6.0.1")
 
     //Any Chart Android
     implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
 
+    //RecyclerView
+    implementation("it.xabaras.android:recyclerview-swipedecorator:1.4")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

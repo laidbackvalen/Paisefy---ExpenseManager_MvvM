@@ -3,10 +3,11 @@
     <style name="Base.Theme.PaisefyMoneyManager" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.PaisefyMoneyManager" parent="Base.Theme.PaisefyMoneyManager" />
-
     <style name="App.CustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/themeDark</item>
     </style>

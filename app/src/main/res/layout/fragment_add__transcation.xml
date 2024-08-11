@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.fragments.Add_Transcation_Fragment">
-    
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,33 +17,33 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-           android:background="@drawable/dialog_bg"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/dialog_bg">
 
             <TextView
                 android:id="@+id/incomeButton"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
+                android:background="@drawable/txtbottomsheet_bg_income"
                 android:gravity="center"
                 android:text="INCOME"
-                android:background="@drawable/txtbottomsheet_bg_income"
                 android:textColor="#4CAF50"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/expenseButton"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/expenseButton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="15dp"
-                android:text="EXPENSE"
-                android:gravity="center"
-                android:textColor="@color/red"
                 android:background="@drawable/txtbottomsheet_bg_expense"
+                android:gravity="center"
+                android:text="EXPENSE"
+                android:textColor="@color/red"
                 app:layout_constraintBottom_toBottomOf="@+id/incomeButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/incomeButton"
@@ -57,18 +57,18 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
-                app:startIconTint="@color/themeColor"
-                app:startIconDrawable="@drawable/baseline_calendar_month_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
-                app:layout_constraintTop_toBottomOf="@+id/incomeButton">
+                app:layout_constraintTop_toBottomOf="@+id/incomeButton"
+                app:startIconDrawable="@drawable/baseline_calendar_month_24"
+                app:startIconTint="@color/themeColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Select Date"
                     android:focusable="false"
+                    android:hint="Select Date"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,19 +80,19 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
-                app:startIconTint="@color/themeColor"
-                app:startIconDrawable="@drawable/baseline_currency_rupee_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                app:startIconDrawable="@drawable/baseline_currency_rupee_24"
+                app:startIconTint="@color/themeColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Amount"
-                    android:maxLength="10"
                     android:inputType="numberDecimal"
+                    android:maxLength="10"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,18 +104,18 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
-                app:startIconTint="@color/themeColor"
-                app:startIconDrawable="@drawable/baseline_category_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:startIconDrawable="@drawable/baseline_category_24"
+                app:startIconTint="@color/themeColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Category"
                     android:focusable="false"
+                    android:hint="Category"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,19 +127,19 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
-                app:startIconTint="@color/themeColor"
-                app:startIconDrawable="@drawable/baseline_account_balance_wallet_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+                app:startIconDrawable="@drawable/baseline_account_balance_wallet_24"
+                app:startIconTint="@color/themeColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:focusable="false"
                     android:hint="Account"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,11 +151,11 @@
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
-                app:startIconTint="@color/themeColor"
-                app:startIconDrawable="@drawable/baseline_edit_note_24"
                 app:layout_constraintEnd_toEndOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="@+id/incomeButton"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+                app:startIconDrawable="@drawable/baseline_edit_note_24"
+                app:startIconTint="@color/themeColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/note"
@@ -166,20 +166,48 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/addImgText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:paddingStart="15dp"
+                android:gravity="center|start"
+                android:fontFamily="@font/hind_vadodara"
+                android:text="Would you like to add an Image of your transaction?"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/themeColor"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/imageView14"
+                app:layout_constraintEnd_toStartOf="@+id/imageView14"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/baseline_image_24"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                app:layout_constraintStart_toEndOf="@+id/addImgText"
+                app:layout_constraintTop_toTopOf="@+id/addImgText"
+               />
+
             <Button
                 android:id="@+id/buttonSaveTransaction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/themeColor"
                 android:text="Save Transaction"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
