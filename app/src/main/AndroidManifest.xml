@@ -31,13 +31,13 @@
             android:name=".views.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.SplashScreen"
+            android:name=".authentication.Biometric_Authentication_Activity"
             android:exported="false" />
         <activity
             android:name=".authentication.PasswordAuthenticationActivity"
             android:exported="false" />
         <activity
-            android:name=".authentication.Biometric_Authentication_Activity"
+            android:name=".views.activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
