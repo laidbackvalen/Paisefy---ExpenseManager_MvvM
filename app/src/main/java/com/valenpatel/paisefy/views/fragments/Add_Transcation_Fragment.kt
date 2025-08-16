@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -94,7 +95,8 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
                     val simpleDateFormat = SimpleDateFormat("dd MMM yyyy")
                     val date = simpleDateFormat.format(calendar.time)
                     binding.date.setText(date)
-                }, year, month, day)
+                }, year, month, day
+            )
             datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
         }
@@ -110,12 +112,15 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
             val categoryDialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog).create()
             categoryDialog.setView(lisDialogBinding.root)
 
-            val categoryAdapter = CategoryAdapter(requireContext(), Constants.categoryArrayList, object : CategoryAdapter.CategoryClickListener {
-                override fun onCategoryClick(category: Category) {
-                    binding.category.setText(category.categoryName)
-                    categoryDialog.dismiss()
-                }
-            })
+            val categoryAdapter = CategoryAdapter(
+                requireContext(),
+                Constants.categoryArrayList,
+                object : CategoryAdapter.CategoryClickListener {
+                    override fun onCategoryClick(category: Category) {
+                        binding.category.setText(category.categoryName)
+                        categoryDialog.dismiss()
+                    }
+                })
             lisDialogBinding.recyclerViewForReUsingDialog.layoutManager = GridLayoutManager(requireContext(), 3)
             lisDialogBinding.recyclerViewForReUsingDialog.adapter = categoryAdapter
             categoryDialog.show()
@@ -135,26 +140,29 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
                 Account(0.0, "Other")
             )
 
-            val accountAdapter = AccountsAdapter(requireContext(), accountArrayList, object : AccountsAdapter.AccountTypeClickListener {
-                override fun onAccountTypeClick(accountType: String) {
-                    binding.account.setText(accountType)
-                    accountDialog.dismiss()
-                }
-            })
-            lisDialogBinding.recyclerViewForReUsingDialog.layoutManager = LinearLayoutManager(requireContext())
+            val accountAdapter = AccountsAdapter(requireContext(), accountArrayList,
+                object : AccountsAdapter.AccountTypeClickListener {
+                    override fun onAccountTypeClick(accountType: String) {
+                        binding.account.setText(accountType)
+                        accountDialog.dismiss()
+                    }
+                })
+            lisDialogBinding.recyclerViewForReUsingDialog.layoutManager =
+                LinearLayoutManager(requireContext())
             lisDialogBinding.recyclerViewForReUsingDialog.adapter = accountAdapter
             accountDialog.show()
         }
     }
 
     private fun setupImagePicker() {
-        val activityResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                val inputStream: InputStream? = requireContext().contentResolver.openInputStream(it)
-                bitmap = BitmapFactory.decodeStream(inputStream)
-                binding.imageView14.setImageBitmap(bitmap)
+        val activityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                uri?.let {
+                    val inputStream: InputStream? = requireContext().contentResolver.openInputStream(it)
+                    bitmap = BitmapFactory.decodeStream(inputStream)
+                    binding.imageView14.setImageBitmap(bitmap)
+                }
             }
-        }
 
         binding.imageView14.setOnClickListener {
             activityResultLauncher.launch("image/*")
@@ -211,38 +219,46 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
         val date = binding.date.text.toString()
         val note = binding.note.text.toString()
 
-        if (transaction != null && category.isNotEmpty() && account.isNotEmpty() && amount.isNotEmpty() && date.isNotEmpty() && note.isNotEmpty()) {
-            try {
-                val amount = amount.toDouble()
-                val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                val transactionDate = sdf.parse(date)
+        if (amount.isEmpty()){
+                binding.amount.setError("Enter Amount")
+            }else if (category.isEmpty()){
+                binding.category.setError("Enter Amount")
+            }else if (account.isEmpty()){
+                binding.account.setError("Enter Amount")
+            } else if (transaction != null && category.isNotEmpty() && account.isNotEmpty() && amount.isNotEmpty() && date.isNotEmpty()) {
+                try {
+                    val amount = amount.toDouble()
+                    val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                    val transactionDate = sdf.parse(date)
 
-                if (transactionDate != null) {
-                    val transaction = Transaction(
-                        id = 0,  // This will be set correctly in the update function
-                        transType = transaction,
-                        category = category,
-                        account = account,
-                        note = note,
-                        date = transactionDate,
-                        amount = amount,
-                        false,
-                        bitmap?.let { convertBitmapToByteArray(it) }
-                    )
-                    viewModel.vmInsertTransaction(transaction)
-                    Toast.makeText(requireContext(), "Transaction added successfully", Toast.LENGTH_SHORT).show()
-                    dismiss()
-                } else {
-                    Toast.makeText(requireContext(), "Invalid date", Toast.LENGTH_SHORT).show()
+                    if (transactionDate != null) {
+                        val transaction = Transaction(
+                            id = 0,  // This will be set correctly in the update function
+                            transType = transaction,
+                            category = category,
+                            account = account,
+                            note = note,
+                            date = transactionDate,
+                            amount = amount,
+                            false,
+                            bitmap?.let { convertBitmapToByteArray(it) }
+                        )
+                        viewModel.vmInsertTransaction(transaction)
+                        Toast.makeText(requireContext(), "Transaction added successfully", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    } else {
+                        Toast.makeText(requireContext(), "Invalid date", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
+                } catch (e: ParseException) {
+                    Toast.makeText(requireContext(), "Invalid date format", Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: NumberFormatException) {
-                Toast.makeText(requireContext(), "Invalid amount", Toast.LENGTH_SHORT).show()
-            } catch (e: ParseException) {
-                Toast.makeText(requireContext(), "Invalid date format", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            binding.t.visibility = View.VISIBLE
             }
-        } else {
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     private fun updateTransaction() {
@@ -253,7 +269,7 @@ class Add_Transcation_Fragment : BottomSheetDialogFragment() {
         val date = binding.date.text.toString()
         val note = binding.note.text.toString()
 
-        if (transaction != null && category.isNotEmpty() && account.isNotEmpty() && amount.isNotEmpty() && date.isNotEmpty() && note.isNotEmpty()) {
+        if (transaction != null && category.isNotEmpty() && account.isNotEmpty() && amount.isNotEmpty() && date.isNotEmpty()) {
             try {
                 val amount = amount.toDouble()
                 val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())

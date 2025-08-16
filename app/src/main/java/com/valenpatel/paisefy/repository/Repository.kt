@@ -17,7 +17,6 @@ import java.util.Calendar
 
 class Repository(application: Application) {
 
-
     private val transactionDAO: TransactionDAO
     private val todosDAO: TodosDAO
     private val dataArchiveDAO: DataArchiveDAO
@@ -29,12 +28,14 @@ class Repository(application: Application) {
     val recentlyDeletedData: LiveData<List<RecentlyDeletedDataEntity>>
 
     init {
+        // Initialize the database
         val database = TransactionDatabase.getDatabase(application)
+        // Initialize the DAOs
         transactionDAO = database.transactionDao()
         todosDAO = database.todoDao()
         dataArchiveDAO = database.dataArchiveDao()
         recentlyDeletedDataDAO = database.recentlyDeletedDataDao()
-
+        // Fetch data from the DAOs
         allTransactions = transactionDAO.getAllDataTransaction()
         allTodos = todosDAO.getAllTodos()
         archivedTransactions = dataArchiveDAO.getAll()
@@ -62,7 +63,7 @@ class Repository(application: Application) {
 
     fun getTransactionsByMonth(month: Int, year: Int): LiveData<List<Transaction>> {
         // Calculate the start and end timestamps for the specified month and year
-        val startTimestamp = calculateStartOfMonthTimestamp(month, year)
+        val startTimestamp = calculateStartOfMonthTimestamp(month, year) //the first and last moments of the month (in milliseconds).
         val endTimestamp = calculateEndOfMonthTimestamp(month, year)
 
         // Call the DAO method to fetch transactions within the specified timestamp range

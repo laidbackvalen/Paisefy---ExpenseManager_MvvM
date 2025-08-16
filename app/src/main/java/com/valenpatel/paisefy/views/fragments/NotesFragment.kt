@@ -92,15 +92,28 @@ class NotesFragment : Fragment() {
 
             // Submit
             todoBinding.submit.setOnClickListener {
-                val note: String = todoBinding.note.text.toString()
+                val note: String = todoBinding.note.text.toString().trim()
                 val selectedDate = todoBinding.date.text.toString()
                 val selectedTime = todoBinding.time.text.toString()
-                val todoEntity = TodoEntity(0, note, selectedDate, selectedTime)
-                viewModel.vmInsertTodo(todoEntity)
-                Toast.makeText(requireContext(), "Reminder set successfully", Toast.LENGTH_SHORT).show()
 
-                scheduleAlarm(note, calendar)
+                if(note.isNotEmpty()) {
+                    val todoEntity = TodoEntity(0, note, selectedDate, selectedTime)
+                    viewModel.vmInsertTodo(todoEntity)
+                    Toast.makeText(
+                        requireContext(),
+                        "Reminder set successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    scheduleAlarm(note, calendar)
                 alertDialog.dismiss()
+
+                }else{
+                    Toast.makeText(
+                        requireContext(),
+                        "Please enter a note title",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             alertDialog.show()
         }
