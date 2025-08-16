@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -15,6 +16,15 @@ android {
         versionName = "1.0.14"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("D:\\PROGRAMMING LANGUAGES\\KOTLIN DEVELOPMENT\\ANDROID DEVELOPMENT USING KOTLIN\\JKS Files\\Paisefy\\Paisefy.jks") // path to .jks file
+            storePassword = "131419"
+            keyAlias = "key0"
+            keyPassword = "131419"
+        }
     }
 
     buildTypes {
