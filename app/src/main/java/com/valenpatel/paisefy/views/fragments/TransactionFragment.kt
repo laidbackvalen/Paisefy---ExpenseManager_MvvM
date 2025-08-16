@@ -261,8 +261,7 @@ class TransactionFragment : Fragment(), TransactionsAdapter.OnItemClickedListene
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val datePicker =
-            DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+        val datePicker = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
                 updateDate()
                 updateTransactionsForDate(milliseconds)
@@ -437,11 +436,7 @@ class TransactionFragment : Fragment(), TransactionsAdapter.OnItemClickedListene
                                 animationMode = Snackbar.ANIMATION_MODE_FADE
                             }
 
-                            snackbar.setActionTextColor(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color.dark_orange
-                                )
+                            snackbar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.dark_orange)
                             )
                             snackbar.show()
                         }

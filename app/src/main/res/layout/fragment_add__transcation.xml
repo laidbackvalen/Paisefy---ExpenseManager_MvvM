@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,11 +23,23 @@
             android:background="@drawable/dialog_bg">
 
             <TextView
+                android:id="@+id/ttype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Add Transaction Type :"
+                android:textColor="@color/themeColor"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toStartOf="@+id/incomeButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/incomeButton"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/txtbottomsheet_bg_income"
                 android:gravity="center"
@@ -33,7 +47,7 @@
                 android:textColor="#4CAF50"
                 app:layout_constraintEnd_toStartOf="@+id/expenseButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/ttype" />
 
             <TextView
                 android:id="@+id/expenseButton"
@@ -49,11 +63,24 @@
                 app:layout_constraintStart_toEndOf="@+id/incomeButton"
                 app:layout_constraintTop_toTopOf="@+id/incomeButton" />
 
+            <TextView
+                android:id="@+id/t"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select transaction type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/red"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+
+                app:layout_constraintStart_toStartOf="@+id/incomeButton"
+                app:layout_constraintTop_toBottomOf="@+id/expenseButton" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="18dp"
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/themeColor"
                 app:hintTextColor="@color/themeColor"
@@ -90,7 +117,7 @@
                     android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Amount"
+                    android:hint="Enter Amount"
                     android:inputType="numberDecimal"
                     android:maxLength="10"
                     android:textColor="@color/black" />
@@ -115,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:hint="Category"
+                    android:hint="Add Category"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:hint="Account"
+                    android:hint="Add Account"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -161,7 +188,7 @@
                     android:id="@+id/note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Note"
+                    android:hint="Add Note"
                     android:maxLines="4"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -199,15 +226,15 @@
                 android:id="@+id/buttonSaveTransaction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/themeColor"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
                 android:text="Save Transaction"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+                app:layout_constraintTop_toBottomOf="@+id/addImgText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

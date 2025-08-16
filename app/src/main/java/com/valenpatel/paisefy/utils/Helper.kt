@@ -10,13 +10,13 @@ class Helper {
 //            val simpleDateformat = SimpleDateFormat("dd MMMM yyyy")
 //            return simpleDateformat.format(date)
 //        }
-        fun formateDate(date: Any): String {
+        fun formateDate(date: Any): String {   //Any input
             return when (date) {
-                is Date -> {
+                is Date -> { //if date
                     val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
                     sdf.format(date)
                 }
-                is Long -> {
+                is Long -> { // if long
                     val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
                     sdf.format(Date(date))
                 }
@@ -27,7 +27,7 @@ class Helper {
         }
 
         fun formateDateByMonth(date: Date): String {
-            val simpleDateformat = SimpleDateFormat("MMMM yyyy")
+            val simpleDateformat = SimpleDateFormat("MMMM yyyy")   // change date to this format in month
             return simpleDateformat.format(date)
         }
     }

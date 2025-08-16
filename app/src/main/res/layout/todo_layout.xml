@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:hint="Add Note"
             android:maxLines="3"
+            android:inputType="text"
             android:fontFamily="@font/hind_vadodara"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
